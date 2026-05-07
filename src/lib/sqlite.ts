@@ -1,5 +1,5 @@
 import Database from "better-sqlite3";
-import { join } from "path";
+import { findDatabasePath } from "./runtime-paths";
 
 let db: Database.Database | null = null;
 
@@ -8,7 +8,8 @@ let db: Database.Database | null = null;
  */
 export function getDatabase(): Database.Database {
   if (!db) {
-    const dbPath = join(process.cwd(), "data", "oss-data-analyst.db");
+    const dbPath = findDatabasePath();
+
     console.log(`[SQLite] Connecting to database at: ${dbPath}`);
     db = new Database(dbPath);
     db.pragma("foreign_keys = ON");

@@ -1,12 +1,19 @@
-import { headers } from "next/headers";
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const projectRoot = dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  outputFileTracingRoot: projectRoot,
   typescript: {
     ignoreBuildErrors: false,
   },
   eslint: {
     ignoreDuringBuilds: false,
+  },
+  outputFileTracingIncludes: {
+    "/api/chat": ["./src/semantic/**/*.yml", "./data/oss-data-analyst.db"],
   },
   webpack: (config: any, { isServer }: { isServer: boolean }) => {
     if (isServer) {

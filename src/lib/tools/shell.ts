@@ -1,5 +1,6 @@
 import { createBashTool } from "bash-tool";
 import type { Sandbox } from "@vercel/sandbox";
+import { findSemanticSourcePath } from "@/lib/runtime-paths";
 
 /**
  * Creates bash tools bound to a specific sandbox instance using bash-tool package.
@@ -13,11 +14,13 @@ import type { Sandbox } from "@vercel/sandbox";
  * ```
  */
 export async function createSemanticBashTools(sandbox: Sandbox) {
+  const semanticSourcePath = findSemanticSourcePath();
+
   const { tools } = await createBashTool({
     sandbox,
     destination: "./semantic",
     uploadDirectory: {
-      source: "./src/semantic",
+      source: semanticSourcePath,
       include: "**/*.yml",
     },
   });
