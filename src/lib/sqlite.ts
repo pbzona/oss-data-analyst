@@ -1,6 +1,5 @@
 import Database from "better-sqlite3";
-import { existsSync } from "node:fs";
-import { join } from "path";
+import { findDatabasePath } from "./runtime-paths";
 
 let db: Database.Database | null = null;
 
@@ -9,13 +8,7 @@ let db: Database.Database | null = null;
  */
 export function getDatabase(): Database.Database {
   if (!db) {
-    const dbPath = join(process.cwd(), "data", "oss-data-analyst.db");
-
-    if (!existsSync(dbPath)) {
-      throw new Error(
-        `SQLite database not found at ${dbPath}. cwd=${process.cwd()}. Ensure data/oss-data-analyst.db is included in the server trace for this route.`
-      );
-    }
+    const dbPath = findDatabasePath();
 
     console.log(`[SQLite] Connecting to database at: ${dbPath}`);
     db = new Database(dbPath);
