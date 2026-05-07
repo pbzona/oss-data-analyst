@@ -4,6 +4,7 @@ import z from "zod";
 import { ExecuteSQL } from "./tools/execute-sqlite";
 import { createSandbox } from "./tools/sandbox";
 import { createSemanticBashTools } from "./tools/shell";
+import { DEFAULT_MODEL } from "./models";
 
 const FinalizeReportSchema = z.object({
   sql: z.string(),
@@ -64,7 +65,7 @@ export type Phase = "planning" | "building" | "execution" | "reporting";
 
 export async function runAgent({
   messages,
-  model = "anthropic/claude-opus-4.5",
+  model = DEFAULT_MODEL,
 }: {
   messages: UIMessage[];
   model?: string;
@@ -102,7 +103,7 @@ export async function runAgent({
  */
 export async function runAgentWithSandbox({
   messages,
-  model = "anthropic/claude-opus-4.5",
+  model = DEFAULT_MODEL,
 }: {
   messages: UIMessage[];
   model?: string;
