@@ -51,17 +51,11 @@ import {
   ToolOutput,
 } from "@/components/ai-elements/tool";
 import { Loader } from "@/components/ai-elements/loader";
-
-const models = [
-  {
-    name: "Claude Opus 4.5",
-    value: "anthropic/claude-opus-4.5",
-  },
-];
+import { CLAUDE_MODELS, DEFAULT_MODEL } from "@/lib/models";
 
 const ChatBotDemo = () => {
   const [input, setInput] = useState("");
-  const [model, setModel] = useState<string>(models[0].value);
+  const [model, setModel] = useState<string>(DEFAULT_MODEL);
   const [webSearch, setWebSearch] = useState(false);
   const { messages, sendMessage, status, regenerate } = useChat();
 
@@ -258,7 +252,7 @@ const ChatBotDemo = () => {
                   <PromptInputModelSelectValue />
                 </PromptInputModelSelectTrigger>
                 <PromptInputModelSelectContent>
-                  {models.map((model) => (
+                  {CLAUDE_MODELS.map((model) => (
                     <PromptInputModelSelectItem
                       key={model.value}
                       value={model.value}
