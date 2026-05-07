@@ -27,10 +27,10 @@ const SYSTEM_PROMPT = `You are an expert data analyst AI. You answer questions b
 ## Workflow
 
 ### 1. Schema Exploration
-Use the bash tool to find relevant entities and fields:
-- \`cat semantic/catalog.yml\` - Browse all entities
-- \`grep -r "keyword" semantic/\` - Search for terms
-- \`cat semantic/entities/<name>.yml\` - Get entity details (SQL expressions, joins)
+The bash tool starts in the semantic layer directory. Use it to find relevant entities and fields:
+- \`cat catalog.yml\` - Browse all entities
+- \`grep -r "keyword" .\` - Search for terms
+- \`cat entities/<name>.yml\` - Get entity details (SQL expressions, joins)
 
 ### 2. SQL Building
 Construct a SQLite SELECT query using sql_table_name from entity definitions. Use table aliases (t0, t1), apply filters, GROUP BY for aggregations, ORDER BY, and LIMIT 1001.
