@@ -1,5 +1,3 @@
-import { headers } from "next/headers";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
@@ -7,6 +5,9 @@ const nextConfig = {
   },
   eslint: {
     ignoreDuringBuilds: false,
+  },
+  outputFileTracingIncludes: {
+    "/api/chat": ["./src/semantic/**/*.yml", "./data/oss-data-analyst.db"],
   },
   webpack: (config: any, { isServer }: { isServer: boolean }) => {
     if (isServer) {
